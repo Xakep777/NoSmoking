@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Датасет{% endblock %}
+{% block content %}
+<h2>Робота з датасетом</h2>
+<div class="btn-group mb-3">
+    <a href="/dataset?category=smoking" class="btn btn-outline-danger">Smoking</a>
+    <a href="/dataset?category=no_smoking" class="btn btn-outline-success">No Smoking</a>
+</div>
+<form method="POST" action="/add_image" enctype="multipart/form-data">
+    <input type="hidden" name="category" value="{{ category }}">
+    <input type="file" name="new_image" class="form-control">
+    <button type="submit" class="btn btn-success mt-2">Додати</button>
+</form>
+<div class="row mt-4">
+    {% for img in images %}
+    <div class="col-md-3 mb-4">
+        <img src="{{ url_for('static', filename='dataset/' + category + '/' + img) }}" class="img-thumbnail">
+        <form method="POST" action="/delete_image/{{ category }}/{{ img }}">
+            <button class="btn btn-danger btn-sm mt-2">Видалити</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

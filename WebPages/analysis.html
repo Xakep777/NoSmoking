@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Аналіз ефективності{% endblock %}
+{% block content %}
+<h2>Аналіз ефективності моделі</h2>
+<div class="row">
+    {% for example in examples %}
+    <div class="col-md-6 mb-4">
+        <img src="{{ url_for('static', filename='analysis/' + example) }}" class="img-fluid">
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

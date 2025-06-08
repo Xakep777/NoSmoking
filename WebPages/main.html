@@ -1,1 +1,22 @@
 
+{% extends 'base.html' %}
+{% block title %}Головна сторінка{% endblock %}
+{% block content %}
+<h2>Головна сторінка</h2>
+<p>На цій сторінці ви можете завантажити зображення для подальшого аналізу нейронною мережею щодо виявлення тютюнопаління.</p>
+<form method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" class="form-control">
+    <button type="submit" class="btn btn-primary mt-2">Аналізувати</button>
+</form>
+{% if filename %}
+    <h4 class="mt-4">Результат: {{ result }}</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ url_for('static', filename='uploads/' + filename) }}" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <img src="{{ url_for('static', filename=heatmap) }}" class="img-fluid">
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
